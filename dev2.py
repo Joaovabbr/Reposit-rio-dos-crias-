@@ -1,10 +1,19 @@
+#Código do exercício 1
 def define_posicoes(linha , coluna , orientaçao , tamanho): 
     posição = []
     for numero in range(tamanho): 
         if orientaçao == 'horizontal': 
             posição.append([linha , coluna+numero])
         if orientaçao == 'vertical': 
-            posição.append([linha+numero , coluna)
-    
+            posição.append([linha+numero , coluna])   
     return posição
-print(define_posicoes(2, 4,'vertical', 3))
+
+#Código exercicio 3 
+def faz_jogada(tabuleiro, linha , coluna):
+    if tabuleiro[linha][coluna] == 1: 
+                tabuleiro[linha][coluna] = "X"
+    else: 
+        tabuleiro[linha][coluna] = "-"
+    return tabuleiro
+
+#Código exercicio 5 
