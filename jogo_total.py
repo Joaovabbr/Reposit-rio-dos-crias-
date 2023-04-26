@@ -58,7 +58,7 @@ def posiciona_frota(frota):
 
     return tabuleiro
 
-#Exercício 5 
+#Código exercício 5 
 
 def afundados(embarcaçoes , tabuleiro):
     afundados = 0 
@@ -68,3 +68,36 @@ def afundados(embarcaçoes , tabuleiro):
                 if tabuleiro[chaves[i][contador]] == 'X':
                     afundados += 1 
     return afundados
+
+
+#Código exercício 6
+def posicao_valida(frota, linha, coluna, orientacao, tamanho):
+    tabuleiro2 = posiciona_frota(frota)
+    posicao = define_posicoes(linha, coluna, orientacao, tamanho)
+    locais_com_barco = []
+    vertical = 0 
+    validade = True 
+
+    for i in tabuleiro2:
+        horizontal= 0
+        for o in i:
+            if o == 1:
+                locais_com_barco.append([vertical,horizontal])
+            horizontal += 1
+
+        vertical += 1
+
+    for j in locais_com_barco:
+        for k in posicao:
+            if k[0] == j[0] and k[1] == j[1]:
+                validade = False
+            if k[0] > 9 or k[1] > 9 or k[0] < 0 or k[1] < 0:
+                validade = False
+
+    for w in posicao:
+            if w[0] > 9 or w[1] > 9 or w[0] < 0 or w[1] < 0:
+                validade = False
+
+            
+
+    return validade
