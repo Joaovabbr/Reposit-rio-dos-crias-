@@ -17,3 +17,18 @@ def faz_jogada(tabuleiro, linha , coluna):
     return tabuleiro
 
 #Código exercicio 5 
+
+#A embarcação terá o posicionamento das Grotas 
+#O tabuleiro terá um número de X 
+#tenho que percorrer todas as chaves do dicionário conferindo se, a posição referente a elas no tabuleiro é igual a X 
+def afundados(embarcaçoes , tabuleiro):
+    afundados = 0 
+    for chaves in embarcaçoes.values():
+        for i in range(len(chaves)):
+            for contador in range(len(chaves[i])):
+                if tabuleiro[chaves[i][contador]] == 'X':
+                    afundados += 1 
+    return afundados
+    
+          
+          

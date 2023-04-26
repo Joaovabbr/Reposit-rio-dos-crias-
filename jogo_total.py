@@ -57,3 +57,14 @@ def posiciona_frota(frota):
 
 
     return tabuleiro
+
+#Exercício 5 
+
+def afundados(embarcaçoes , tabuleiro):
+    afundados = 0 
+    for chaves in embarcaçoes.values():
+        for i in range(len(chaves)):
+            for contador in range(len(chaves[i])):
+                if tabuleiro[chaves[i][contador]] == 'X':
+                    afundados += 1 
+    return afundados
