@@ -17,18 +17,24 @@ def faz_jogada(tabuleiro, linha , coluna):
     return tabuleiro
 
 #Código exercicio 5 
-
-#A embarcação terá o posicionamento das Grotas 
-#O tabuleiro terá um número de X 
-#tenho que percorrer todas as chaves do dicionário conferindo se, a posição referente a elas no tabuleiro é igual a X 
-def afundados(embarcaçoes , tabuleiro):
+def afundados(frota, tabuleiro):
     afundados = 0 
-    for chaves in embarcaçoes.values():
-        for i in range(len(chaves)):
-            for contador in range(len(chaves[i])):
-                if tabuleiro[chaves[i][contador]] == 'X':
+    #Estou fazendo valores ser a lista dentro do valor do dicionário 
+    for valores in frota.values():
+        #estou fazendo navios ser a grande lista dentro da lista maior 
+        for navios in valores:
+            #estou resetando a posição navio para 0 para cada vez que ele mudar na lista intermediária 
+            posição_navio = 0 
+            for coordenadas in navios: 
+                x = coordenadas[0]
+                y = coordenadas[1]
+                if tabuleiro[x][y] == 'X' or tabuleiro[x][y] == '-':
+                    posição_navio += 1 
+                if posição_navio == len(navios):
                     afundados += 1 
-    return afundados
+    return afundados  
+
+
     
           
           
