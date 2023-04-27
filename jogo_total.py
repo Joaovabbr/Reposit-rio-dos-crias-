@@ -60,12 +60,17 @@ def posiciona_frota(frota):
 
 #Código exercício 5 
 
-def afundados(embarcaçoes , tabuleiro):
-    afundados = 0 
-    for chaves in embarcaçoes.values():
-        for i in range(len(chaves)):
-            for contador in range(len(chaves[i])):
-                if tabuleiro[chaves[i][contador]] == 'X':
+def afundados(frota, tabuleiro):
+    afundados = 0  
+    for valores in frota.values(): 
+        for navios in valores:
+            posição_navio = 0 
+            for coordenadas in navios: 
+                x = coordenadas[0]
+                y = coordenadas[1]
+                if tabuleiro[x][y] == 'X' or tabuleiro[x][y] == '-':
+                    posição_navio += 1 
+                if posição_navio == len(navios):
                     afundados += 1 
     return afundados
 
