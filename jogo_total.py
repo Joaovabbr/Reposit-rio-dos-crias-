@@ -106,3 +106,7 @@ def posicao_valida(frota, linha, coluna, orientacao, tamanho):
             
 
     return validade
+
+#Código do exercício 7 
+
+

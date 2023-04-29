@@ -34,6 +34,7 @@ def afundados(frota, tabuleiro):
                     afundados += 1 
     return afundados  
 
+#Código exercício 7 
 
     
           
