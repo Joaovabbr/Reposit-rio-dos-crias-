@@ -13,6 +13,7 @@ def define_posicoes(linha, coluna, orientacao, tamanho):
 # Código exercício 2 
 
 def preenche_frota(frota, navio, linha, coluna, orientacao, tamanho):
+
     frota1 = frota
     if navio not in frota1:
 
@@ -108,5 +109,103 @@ def posicao_valida(frota, linha, coluna, orientacao, tamanho):
     return validade
 
 #Código do exercício 7 
+tipos = ['porta-aviões', 'navio-tanque', 'contratorpedeiro', 'submarino']
+frota = {
+    "porta-aviões":[],
+    "navio-tanque":[],
+    "contratorpedeiro":[],
+    "submarino": [],
+}
+
+i = 0
+while i < len(tipos):
+    if i == 0:
+
+        Q_navio = 0
+
+        while Q_navio < 1:
+
+            print('Insira as informações referentes ao navio porta-aviões que possui tamanho 4')
+            linha = int(input('Linha: '))
+            coluna = int(input('Coluna: '))
+            orientacao = int(input('[1] vertical [2] horizontal >'))
+            if orientacao == 2:
+                orientacao = 'horizontal'
+            else:
+                orientacao = 'vertical'
+
+            if posicao_valida(frota, linha, coluna,orientacao, 4) == True:
+                frota[tipos[i]] = [(define_posicoes(linha, coluna, orientacao, 4))]
+                Q_navio += 1
+
+            else: 
+                print('Esta posição não está válida!')
+            
+
+    if i == 1:
+
+        Q_navio = 0
+
+        while Q_navio < 2:
+            print('Insira as informações referentes ao navio navio-tanque que possui tamanho 3')
+            linha = int(input('Linha: '))
+            coluna = int(input('Coluna: '))
+            orientacao = int(input('[1] vertical [2] horizontal >'))
+            if orientacao == 2:
+                orientacao = 'horizontal'
+            else:
+                orientacao = 'vertical'
+
+            if posicao_valida(frota, linha, coluna,orientacao, 3) == True:
+                if tipos[i] not in frota:
+                    frota[tipos[i]] = [(define_posicoes(linha, coluna, orientacao, 3))]
+                    Q_navio += 1
+                if tipos[i] in frota:
+                    frota[tipos[i]] += [(define_posicoes(linha,coluna,orientacao, 3))]
+                    Q_navio += 1
+
+            else: 
+                print('Esta posição não está válida!')
+
+    if i == 2:
+        Q_navio = 0
+        while Q_navio < 3:
+            print('Insira as informações referentes ao navio contratorpedeiro que possui tamanho 2')
+            linha = int(input('Linha: '))
+            coluna = int(input('Coluna: '))
+            orientacao = int(input('[1] vertical [2] horizontal >'))
+            if orientacao == 2:
+                orientacao = 'horizontal'
+            else:
+                orientacao = 'vertical'
+
+            if posicao_valida(frota, linha, coluna,orientacao, 2) == True:
+                if tipos[i] not in frota:
+                    frota[tipos[i]] = [(define_posicoes(linha, coluna, orientacao, 2))]
+                    Q_navio += 1
+                if tipos[i] in frota:
+                    frota[tipos[i]] += [(define_posicoes(linha,coluna,orientacao, 2))]
+                    Q_navio += 1
+            else: 
+                print('Esta posição não está válida!')
+
+    
+    if i == 3:
+        Q_navio = 0
+        while Q_navio < 4:
+            print('Insira as informações referentes ao navio submarino que possui tamanho 1')
+            linha = int(input('Linha: '))
+            coluna = int(input('Coluna: '))
+            orientacao = 'vertical'
+
+            if posicao_valida(frota, linha, coluna,orientacao, 1) == True:
+                if tipos[i] not in frota:
+                    frota[tipos[i]] = [(define_posicoes(linha, coluna, orientacao, 1))]
+                    Q_navio += 1
+                if tipos[i] in frota:
+                    frota[tipos[i]] += [(define_posicoes(linha,coluna,orientacao, 1))]
+                    Q_navio += 1
+            else: 
+                print('Esta posição não está válida!')
 
 
