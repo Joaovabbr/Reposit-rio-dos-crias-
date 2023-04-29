@@ -209,3 +209,51 @@ while i < len(tipos):
                 print('Esta posição não está válida!')
 
 
+#Código exercício 8
+
+def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
+    texto = ''
+    texto += '   0  1  2  3  4  5  6  7  8  9         0  1  2  3  4  5  6  7  8  9\n'
+    texto += '_______________________________      _______________________________\n'
+
+    for linha in range(len(tabuleiro_jogador)):
+        jogador_info = '  '.join([str(item) for item in tabuleiro_jogador[linha]])
+        oponente_info = '  '.join([info if str(info) in 'X-' else '0' for info in tabuleiro_oponente[linha]])
+        texto += f'{linha}| {jogador_info}|     {linha}| {oponente_info}|\n'
+    return texto
+frota_inimiga = {
+    'porta-aviões': [
+        [[9, 1], [9, 2], [9, 3], [9, 4]]
+    ],
+    'navio-tanque': [
+        [[6, 0], [6, 1], [6, 2]],
+        [[4, 3], [5, 3], [6, 3]]
+    ],
+    'contratorpedeiro': [
+        [[1, 6], [1, 7]],
+        [[0, 5], [1, 5]],
+        [[3, 6], [3, 7]]
+    ],
+    'submarino': [
+        [[2, 7]],
+        [[0, 6]],
+        [[9, 7]],
+        [[7, 6]]
+    ]
+}
+tabuleiro_inimigo = posiciona_frota(frota_inimiga)
+
+tabuleiro_jogador = posiciona_frota(frota)
+
+jogando = True 
+
+while jogando:
+    tabuleiro = monta_tabuleiros(tabuleiro_jogador, tabuleiro_inimigo)
+    print(tabuleiro)
+    ataque_l = int(input('Jogador, qual linha deseja atacar? '))
+    ataque_c = int(input('Jogador, qual coluna deseja atacar? '))
+    if ataque_l > 9 or ataque_l < 0:
+        print('Linha inválida!')
+    if ataque_c > 9 or ataque_c < 0:
+        print('Coluna inválida!')
+    while afundados(frota, tabuleiro_inimigo) != 10:
