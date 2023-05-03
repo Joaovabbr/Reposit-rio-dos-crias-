@@ -69,7 +69,7 @@ def afundados(frota, tabuleiro):
             for coordenadas in navios: 
                 x = coordenadas[0]
                 y = coordenadas[1]
-                if tabuleiro[x][y] == 'X':
+                if tabuleiro[x][y] == 'X' :
                     posição_navio += 1 
                 if posição_navio == len(navios):
                     afundados += 1 
