@@ -69,7 +69,7 @@ def afundados(frota, tabuleiro):
             for coordenadas in navios: 
                 x = coordenadas[0]
                 y = coordenadas[1]
-                if tabuleiro[x][y] == 'X':
+                if tabuleiro[x][y] == 'X' :
                     posição_navio += 1 
                 if posição_navio == len(navios):
                     afundados += 1 
@@ -207,9 +207,11 @@ while i < len(tipos):
                     Q_navio += 1
             else: 
                 print('Esta posição não está válida!')
-    i += 1 
 
-#Código exercício 8
+
+    i += 1
+
+    #Código exercício 8
 
 
 
@@ -218,3 +220,36 @@ while i < len(tipos):
 
     
 
+jogando = True 
+
+ataques = []
+
+while jogando:
+    tabuleiro = monta_tabuleiros(tabuleiro_jogador, tabuleiro_inimigo)
+    print(tabuleiro)
+
+    ataque = True
+    while ataque:
+        ataque_l = int(input('Jogador, qual linha deseja atacar? '))
+        while ataque_l < 0 or ataque_l > 9:
+            print('Linha inválida!')
+            ataque_l = int(input('Jogador, qual linha deseja atacar? '))
+        ataque_c = int(input('Jogador, qual coluna deseja atacar? '))
+        while ataque_c < 0 or ataque_c > 9:
+            print('Coluna inválida!')
+            ataque_c = int(input('Jogador, qual coluna deseja atacar? '))
+        ataque_momento = [ataque_l , ataque_c]
+        if ataque_momento not in ataques:
+            
+            ataques.append(ataque_momento)
+            ataque = False
+
+        else: 
+            print(f'A posição linha {ataque_l} e coluna {ataque_c} já foi informada anteriormente!')
+
+    tabuleiro_inimigo = faz_jogada(tabuleiro_inimigo, ataque_l, ataque_c)
+    afundou = afundados(frota_inimiga, tabuleiro_inimigo)
+
+    if afundou == 10:
+        print('Parabéns! Você derrubou todos os navios do seu oponente!')
+        jogando = False
