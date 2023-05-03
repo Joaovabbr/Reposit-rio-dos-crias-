@@ -210,3 +210,73 @@ while i < len(tipos):
 
 
     i += 1
+
+    #Código exercício 8
+
+def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
+    texto = ''
+    texto += '   0  1  2  3  4  5  6  7  8  9         0  1  2  3  4  5  6  7  8  9\n'
+    texto += '_______________________________      _______________________________\n'
+
+    for linha in range(len(tabuleiro_jogador)):
+        jogador_info = '  '.join([str(item) for item in tabuleiro_jogador[linha]])
+        oponente_info = '  '.join([info if str(info) in 'X-' else '0' for info in tabuleiro_oponente[linha]])
+        texto += f'{linha}| {jogador_info}|     {linha}| {oponente_info}|\n'
+    return texto
+frota_inimiga = {
+    'porta-aviões': [
+        [[9, 1], [9, 2], [9, 3], [9, 4]]
+    ],
+    'navio-tanque': [
+        [[6, 0], [6, 1], [6, 2]],
+        [[4, 3], [5, 3], [6, 3]]
+    ],
+    'contratorpedeiro': [
+        [[1, 6], [1, 7]],
+        [[0, 5], [1, 5]],
+        [[3, 6], [3, 7]]
+    ],
+    'submarino': [
+        [[2, 7]],
+        [[0, 6]],
+        [[9, 7]],
+        [[7, 6]]
+    ]
+}
+tabuleiro_inimigo = posiciona_frota(frota_inimiga)
+
+tabuleiro_jogador = posiciona_frota(frota)
+
+jogando = True 
+
+ataques = []
+
+while jogando:
+    tabuleiro = monta_tabuleiros(tabuleiro_jogador, tabuleiro_inimigo)
+    print(tabuleiro)
+
+    ataque = True
+    while ataque:
+        ataque_l = int(input('Jogador, qual linha deseja atacar? '))
+        while ataque_l < 0 or ataque_l > 9:
+            print('Linha inválida!')
+            ataque_l = int(input('Jogador, qual linha deseja atacar? '))
+        ataque_c = int(input('Jogador, qual coluna deseja atacar? '))
+        while ataque_c < 0 or ataque_c > 9:
+            print('Coluna inválida!')
+            ataque_c = int(input('Jogador, qual coluna deseja atacar? '))
+        ataque_momento = [ataque_l , ataque_c]
+        if ataque_momento not in ataques:
+            
+            ataques.append(ataque_momento)
+            ataque = False
+
+        else: 
+            print(f'A posição linha {ataque_l} e coluna {ataque_c} já foi informada anteriormente!')
+
+    tabuleiro_inimigo = faz_jogada(tabuleiro_inimigo, ataque_l, ataque_c)
+    afundou = afundados(frota_inimiga, tabuleiro_inimigo)
+
+    if afundou == 10:
+        print('Parabéns! Você derrubou todos os navios do seu oponente!')
+        jogando = False
