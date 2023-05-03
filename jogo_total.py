@@ -108,7 +108,7 @@ def posicao_valida(frota, linha, coluna, orientacao, tamanho):
 
     return validade
 
-#Código do exercício 7 - Posicionando Frota 
+#Código do exercício 7 
 tipos = ['porta-aviões', 'navio-tanque', 'contratorpedeiro', 'submarino']
 frota = {
     "porta-aviões":[],
@@ -213,12 +213,39 @@ while i < len(tipos):
 
     #Código exercício 8
 
+def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
+    texto = ''
+    texto += '   0  1  2  3  4  5  6  7  8  9         0  1  2  3  4  5  6  7  8  9\n'
+    texto += '_______________________________      _______________________________\n'
 
+    for linha in range(len(tabuleiro_jogador)):
+        jogador_info = '  '.join([str(item) for item in tabuleiro_jogador[linha]])
+        oponente_info = '  '.join([info if str(info) in 'X-' else '0' for info in tabuleiro_oponente[linha]])
+        texto += f'{linha}| {jogador_info}|     {linha}| {oponente_info}|\n'
+    return texto
+frota_inimiga = {
+    'porta-aviões': [
+        [[9, 1], [9, 2], [9, 3], [9, 4]]
+    ],
+    'navio-tanque': [
+        [[6, 0], [6, 1], [6, 2]],
+        [[4, 3], [5, 3], [6, 3]]
+    ],
+    'contratorpedeiro': [
+        [[1, 6], [1, 7]],
+        [[0, 5], [1, 5]],
+        [[3, 6], [3, 7]]
+    ],
+    'submarino': [
+        [[2, 7]],
+        [[0, 6]],
+        [[9, 7]],
+        [[7, 6]]
+    ]
+}
+tabuleiro_inimigo = posiciona_frota(frota_inimiga)
 
-    
-
-
-    
+tabuleiro_jogador = posiciona_frota(frota)
 
 jogando = True 
 
