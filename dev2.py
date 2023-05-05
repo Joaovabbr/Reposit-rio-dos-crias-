@@ -209,7 +209,10 @@ while i < len(tipos):
 
     i += 1
     
-#Jogadas do jogador 
+#Jogadas do jogador e jogadas do inimigo
+import random
+random.seed(2)
+
 def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
     texto = ''
     texto += '   0  1  2  3  4  5  6  7  8  9         0  1  2  3  4  5  6  7  8  9\n'
@@ -246,7 +249,7 @@ tabuleiro_jogador = posiciona_frota(frota)
 
 jogando = True 
 ataques = []
-
+ataques_inimgo = []
 while jogando: 
     jogada_ataque = True
     tabuleiro = monta_tabuleiros(tabuleiro_jogador , tabuleiro_inimigo)
@@ -274,5 +277,26 @@ while jogando:
     
     if número_afundados == 10: 
         print('Parabéns! Você derrubou todos os navios do seu oponente!')
-        jogando = False         
+        jogando = False  
+    
+    elif número_afundados < 10:
+        inimigo = True
+        while inimigo: 
+            inimigo_linha = random.randint(0,9)
+            inimigo_coluna = random.randint(0,9)
+            ataque_i = [inimigo_linha , inimigo_coluna]
+            if ataque_i not in ataques_inimgo:
+                ataques_inimgo.append(ataque_i)
+                inimigo = False
+                print('Seu oponente está atacando na linha {0} e coluna {1}'.format(inimigo_linha , inimigo_coluna))
+        tabuleiro_jogador = faz_jogada(tabuleiro_jogador , inimigo_linha , inimigo_coluna)
+        afundados_inimigo = afundados(frota , tabuleiro_jogador)
+
+        if afundados_inimigo == 10: 
+            jogando = False
+            print('Xi! O oponente derrubou toda a sua frota =(')
+
+        
+
+      
           
