@@ -128,7 +128,7 @@ while i < len(tipos):
             print('Insira as informações referentes ao navio porta-aviões que possui tamanho 4')
             linha = int(input('Linha: '))
             coluna = int(input('Coluna: '))
-            orientacao = int(input('[1] vertical [2] horizontal >'))
+            orientacao = int(input('[1] vertical [2] horizontal: '))
             if orientacao == 2:
                 orientacao = 'horizontal'
             else:
@@ -150,7 +150,7 @@ while i < len(tipos):
             print('Insira as informações referentes ao navio navio-tanque que possui tamanho 3')
             linha = int(input('Linha: '))
             coluna = int(input('Coluna: '))
-            orientacao = int(input('[1] vertical [2] horizontal >'))
+            orientacao = int(input('[1] vertical [2] horizontal: '))
             if orientacao == 2:
                 orientacao = 'horizontal'
             else:
@@ -173,7 +173,7 @@ while i < len(tipos):
             print('Insira as informações referentes ao navio contratorpedeiro que possui tamanho 2')
             linha = int(input('Linha: '))
             coluna = int(input('Coluna: '))
-            orientacao = int(input('[1] vertical [2] horizontal >'))
+            orientacao = int(input('[1] vertical [2] horizontal: '))
             if orientacao == 2:
                 orientacao = 'horizontal'
             else:
