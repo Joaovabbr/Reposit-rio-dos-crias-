@@ -1,4 +1,7 @@
 #Código exercício 1 
+import random
+random.seed(2)
+
 def define_posicoes(linha, coluna, orientacao, tamanho):
     posicoes = []
     for i in range(tamanho):
@@ -128,7 +131,7 @@ while i < len(tipos):
             print('Insira as informações referentes ao navio porta-aviões que possui tamanho 4')
             linha = int(input('Linha: '))
             coluna = int(input('Coluna: '))
-            orientacao = int(input('[1] vertical [2] horizontal >'))
+            orientacao = int(input('[1] vertical [2] horizontal: '))
             if orientacao == 2:
                 orientacao = 'horizontal'
             else:
@@ -150,7 +153,7 @@ while i < len(tipos):
             print('Insira as informações referentes ao navio navio-tanque que possui tamanho 3')
             linha = int(input('Linha: '))
             coluna = int(input('Coluna: '))
-            orientacao = int(input('[1] vertical [2] horizontal >'))
+            orientacao = int(input('[1] vertical [2] horizontal: '))
             if orientacao == 2:
                 orientacao = 'horizontal'
             else:
@@ -173,7 +176,7 @@ while i < len(tipos):
             print('Insira as informações referentes ao navio contratorpedeiro que possui tamanho 2')
             linha = int(input('Linha: '))
             coluna = int(input('Coluna: '))
-            orientacao = int(input('[1] vertical [2] horizontal >'))
+            orientacao = int(input('[1] vertical [2] horizontal: '))
             if orientacao == 2:
                 orientacao = 'horizontal'
             else:
@@ -250,24 +253,29 @@ tabuleiro_jogador = posiciona_frota(frota)
 jogando = True 
 
 ataques = []
-
+ataques_oponente = []
 while jogando:
     tabuleiro = monta_tabuleiros(tabuleiro_jogador, tabuleiro_inimigo)
     print(tabuleiro)
 
     ataque = True
     while ataque:
+        #Ataque do jogador 
         ataque_l = int(input('Jogador, qual linha deseja atacar? '))
+
         while ataque_l < 0 or ataque_l > 9:
             print('Linha inválida!')
             ataque_l = int(input('Jogador, qual linha deseja atacar? '))
         ataque_c = int(input('Jogador, qual coluna deseja atacar? '))
+
+
         while ataque_c < 0 or ataque_c > 9:
             print('Coluna inválida!')
             ataque_c = int(input('Jogador, qual coluna deseja atacar? '))
+
         ataque_momento = [ataque_l , ataque_c]
+
         if ataque_momento not in ataques:
-            
             ataques.append(ataque_momento)
             ataque = False
 
@@ -276,7 +284,41 @@ while jogando:
 
     tabuleiro_inimigo = faz_jogada(tabuleiro_inimigo, ataque_l, ataque_c)
     afundou = afundados(frota_inimiga, tabuleiro_inimigo)
+    afundou2 = afundados(frota, tabuleiro_jogador)
+
+    if afundou2 != 10:
+    
+        ataque_oponente = True
+        while ataque_oponente:
+            #Ataque do oponete 
+            ataqueoponente_l = random.randint(0,9) #define a linha de ataque do oponente
+            ataqueoponente_c = random.randint(0,9) #define a coluna de ataque do oponente
+
+            ataqueoponente_momento = [ataqueoponente_l, ataqueoponente_c] 
+            
+            if ataqueoponente_momento not in ataques_oponente: #verifica se a posição de ataque não é repetida
+                ataques_oponente.append(ataqueoponente_momento)  #adiciona os ataques no histórico para verificação
+                ataque_oponente = False
+            
+            else:
+                while ataqueoponente_momento in ataques_oponente: 
+
+                    ataqueoponente_l = random.randint(0,9)
+                    ataqueoponente_c = random.randint(0,9)
+
+                    ataqueoponente_momento = [ataqueoponente_l, ataqueoponente_c]
+
+        
+        tabuleiro_jogador = faz_jogada(tabuleiro_jogador, ataqueoponente_l, ataqueoponente_c)
+    
 
     if afundou == 10:
         print('Parabéns! Você derrubou todos os navios do seu oponente!')
         jogando = False
+
+    elif afundou2 == 10:
+        print('Xi! O oponente derrubou toda a sua frota =(')
+        jogando = False
+
+    else:
+        print(f'Seu oponente está atacando na linha {ataqueoponente_l} e coluna {ataqueoponente_c}')
