@@ -213,6 +213,8 @@ while i < len(tipos):
 
     #Código exercício 8
 
+import random
+
 def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
     texto = ''
     texto += '   0  1  2  3  4  5  6  7  8  9         0  1  2  3  4  5  6  7  8  9\n'
@@ -248,35 +250,50 @@ tabuleiro_inimigo = posiciona_frota(frota_inimiga)
 tabuleiro_jogador = posiciona_frota(frota)
 
 jogando = True 
-
 ataques = []
-
-while jogando:
-    tabuleiro = monta_tabuleiros(tabuleiro_jogador, tabuleiro_inimigo)
+ataques_inimgo = []
+while jogando: 
+    jogada_ataque = True
+    tabuleiro = monta_tabuleiros(tabuleiro_jogador , tabuleiro_inimigo)
     print(tabuleiro)
-
-    ataque = True
-    while ataque:
-        ataque_l = int(input('Jogador, qual linha deseja atacar? '))
-        while ataque_l < 0 or ataque_l > 9:
-            print('Linha inválida!')
-            ataque_l = int(input('Jogador, qual linha deseja atacar? '))
-        ataque_c = int(input('Jogador, qual coluna deseja atacar? '))
-        while ataque_c < 0 or ataque_c > 9:
+    while jogada_ataque:
+        jogador_linha = int(input("Digite uma linha de 0 a 9: "))
+        while jogador_linha > 9 or jogador_linha < 0:
+            print("'Linha inválida!'")
+            jogador_linha = int(input("Digite uma linha de 0 a 9: ")) 
+        
+        jogador_coluna = int(input("Digite uma coluna de 0 a 9: "))
+        while jogador_coluna > 9 or jogador_coluna < 0: 
             print('Coluna inválida!')
-            ataque_c = int(input('Jogador, qual coluna deseja atacar? '))
-        ataque_momento = [ataque_l , ataque_c]
-        if ataque_momento not in ataques:
-            
-            ataques.append(ataque_momento)
-            ataque = False
-
-        else: 
-            print(f'A posição linha {ataque_l} e coluna {ataque_c} já foi informada anteriormente!')
-
-    tabuleiro_inimigo = faz_jogada(tabuleiro_inimigo, ataque_l, ataque_c)
-    afundou = afundados(frota_inimiga, tabuleiro_inimigo)
-
-    if afundou == 10:
+            jogador_coluna = int(input("Digite uma coluna de 0 a 9: "))
+        
+        if [jogador_linha , jogador_coluna] not in ataques:
+            ataques.append([jogador_linha, jogador_coluna])
+            jogada_ataque = False
+        
+        else:
+            print('A posição da {0} e coluna {1} já foi informada anteriormente'.format(jogador_linha , jogador_coluna))
+    
+    tabuleiro_inimigo = faz_jogada(tabuleiro_inimigo , jogador_linha , jogador_coluna)
+    número_afundados = afundados(frota_inimiga,tabuleiro_inimigo)
+    
+    if número_afundados == 10: 
         print('Parabéns! Você derrubou todos os navios do seu oponente!')
-        jogando = False
+        jogando = False  
+    
+    elif número_afundados < 10:
+        inimigo = True
+        while inimigo: 
+            inimigo_linha = random.randint(0,9)
+            inimigo_coluna = random.randint(0,9)
+            ataque_i = [inimigo_linha , inimigo_coluna]
+            if ataque_i not in ataques_inimgo:
+                ataques_inimgo.append(ataque_i)
+                inimigo = False
+                print('Seu oponente está atacando na linha {0} e coluna {1}'.format(inimigo_linha , inimigo_coluna))
+        tabuleiro_jogador = faz_jogada(tabuleiro_jogador , inimigo_linha , inimigo_coluna)
+        afundados_inimigo = afundados(frota , tabuleiro_jogador)
+
+        if afundados_inimigo == 10: 
+            jogando = False
+            print('Xi! O oponente derrubou toda a sua frota =(')

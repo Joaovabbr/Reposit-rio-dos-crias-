@@ -211,7 +211,6 @@ while i < len(tipos):
     
 #Jogadas do jogador e jogadas do inimigo
 import random
-random.seed(2)
 
 def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
     texto = ''
