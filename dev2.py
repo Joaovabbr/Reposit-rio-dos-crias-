@@ -276,7 +276,8 @@ while jogando:
     
     if número_afundados == 10: 
         print('Parabéns! Você derrubou todos os navios do seu oponente!')
-        jogando = False  
+        jogando = False 
+        número_afundados = 0  
     
     elif número_afundados < 10:
         inimigo = True
